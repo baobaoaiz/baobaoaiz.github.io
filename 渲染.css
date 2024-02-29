@@ -1,0 +1,21 @@
+p{
+    color: rgb(7, 7, 75);
+}
+a{
+    color: rgb(21, 54, 161);
+    font-size: 20px;
+}
+#nickname{
+    color:rgb(39, 3, 3);
+    font-size: 30px;
+    text-align:center;
+}
+#signature{
+    color: blueviolet;
+    font-size: 20px;
+    text-align:center;
+}
+.info_type{
+    color: brown;
+    font-size: 25px;
+}

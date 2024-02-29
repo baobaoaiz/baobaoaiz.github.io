@@ -1,0 +1,107 @@
+feat(CDSP) : 增加qnx系统内存，增加CDSP共享内存为700M.
+
+Description:
+		增加qnx系统内存，增加CDSP共享内存700M.
+		
+git push origin HEAD:refs/for/qualcom/sn8155/74X2622/develop/yingchi_apa
+origin/qualcom/sn8155/74X2622/develop/yingchi_apa
+
+
+feat(memory) : 增加qnx系统内存，增加CDSP共享内存为700M.
+feat(cdsp): 还原CDSP驱动
+
+Description:
+还原CDSP驱动
+
+Product: INTERIOR_74X2622
+Span: None
+
+
+Dependency:
+http://10.100.193.154:8081/#/c/85964/
+http://10.100.193.154:8081/#/c/85984/
+
+Change-Id: I66fd6eced558d3388da7fd1034f2b342d94cad4a
+
+
+
+feat(Avas): patch
+
+Description:
+update Avas calibration file
+
+Product: INTERIOR_74X2622
+Span: None
+
+
+0.71864
+
+
+feat:增加埋点数据上传。
+rootcause:manifest
+solution:modify AY3/AY5 BSP B2 manifest
+product:AY3/AY5
+span:x9e
+build:ok
+test:ok
+fid:NO
+level:L
+
+feat[diagservice]: 增加埋点数据上传。
+
+rootcause: add datafault
+solution:add datafault
+Product: X66
+Span: NONE
+Build: pass
+Test: pass
+FID: NONE
+Level: NONE
+
+
+1.使用CAN诊断读取屏端相关的DTC。
+2.使用CAN诊断读取屏端相关的DID。
+3.Android读取按协议读取来自qnx的埋点数据上报。
+
+
+
+1.若屏端异常，读取确定的DTC。若屏端正常，读取未确定的DTC。
+2.若屏端正常，读出正确的DID。
+3.若屏端异常，上报faultcode+状态值为1的数据。若屏端恢复正常，上报faultcode+状态值为0的数据。
+
+
+
+第二阶段要做的：
+
+屏幕未连接(UnLock)
+屏幕己接，与主机串行器IIC通讯异常(无法通讯）
+屏幕己接，与屏幕解串器IIC通讯异常(无法通讯）
+屏幕解串器异常
+屏端故障-屏幕MCU异常
+屏端故障-屏幕高压（详细原因）
+屏端故障-屏幕低压（详细原因）
+屏端故障-背光异常（详细原因）
+屏端故障-TFT异常（详细原因）
+屏端故障-OVER_TEMPERATURE 高温（详细原因）
+内部电源高于极限或存储器故障或MCU故障恢复1秒（详细原因）
+
+feat[disp_comm]: 增加屏幕故障埋点。
+rootcause: add datafault
+solution:add datafault
+product: X66
+span: NONE
+build: pass
+test: pass
+fid: NONE
+level: NONE
+
+git push origin HEAD:refs/for/trunk
+git push origin HEAD:refs/for/X66_trunk_B2
+remotes/origin/X66_trunk_B2
+
+/*********************************A10A******len**********)0x0000********data****/
+	static uint8_t datas[13] = {0,    161,10,   9,    0,      0,0,0,0,     -1,-1,-1,-1};
+	
+	EM_DIAG_DTC_FAULT_STATE
+
+

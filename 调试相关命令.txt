@@ -1,0 +1,263 @@
++1 安卓投屏OTA升级
+	串口执行 htalk adb
+	windows终端执行：
+		adb connect 192.168.137.75
+		scrcpy.exe
+2 STR测试 echo test timer 60 > /dev/power/ctl
+3 docker编译常用路径
+/home/chinatsp/workspace/changan_pro/qnx/apps/qnx_ap/AMSS/trunk/workspace/DiagETH
+/home/chinatsp/workspace/changan_pro/qnx/apps/qnx_ap/AMSS/amc/data/data/ethernet/emac/driver/utils/test_phy
+
+4 诊断消息查询：
+	pidin a|grep McuAdapter
+	slay McuAdapter
+
+	/usr/bin/McuAdapter -d /dev/spi_ipc/ch0 -s2 -O tsplog -D5 -L &
+
+	tsplog | grep "49 12 01" &    /*routine 响应*/
+	CMD:0x49, SMD:0x12, MPU诊断例程响应
+	CMD:0x49, SMD:0x13, MCU诊断例程请求
+	CMD:0x49, SMD:0x14, MPU诊断DID下发
+	CMD:0x49, SMD:0x16, MPU诊断以太网DTC故障码下发（带快照信息需特殊处理）
+
+5 代码提交
+http://10.100.193.154:8888/login/
+http://10.100.193.154:8888
+
+
+git status .
+git branch -a
+git add .
+git commit --amend
+git push origin HEAD:refs/for/qualcom/sn8155/75A121/develop/main
+qualcom/sn8155/75A121/release/cw52
+git push origin HEAD:refs/for/qualcom/sn8155/75A121/release/ota1
+git push origin HEAD:refs/for/qualcom/sn8155/75A121/release/cw38
+git push origin HEAD:refs/for/qualcom/sn8155/74X2622/new/develop/main
+remotes/origin/qualcom/sn8155/75A121/release/ota1
+feat(DiagETH): 解决电检时，偶发的故障码报错问题。
+
+Description:
+解决电检时，偶发的故障码报错问题，关于目前有两台车报出故障码电检问题。
+
+feat(SystemMonitor): 74x2622项目SystemMonitor.
+
+Description:
+74x2622项目SystemMonitor,解决休眠唤醒，。
+
+feat(DVR): 74x2622项目环视行车记录仪.
+
+Description:
+74x2622项目74x2622项目环视行车记录仪，取消水印，为后期调试，方便录制视频。
+
+feat(checkprocess): 修改APA休眠唤醒时的休眠唤醒方式.
+
+Description:
+修改APA休眠唤醒时的休眠唤醒方式.
+
+feat(TboxService): ping 添加超时参数
+
+Description:
+ping 添加超时参数
+
+6 烧录调试：
+E:\111>adb devices
+List of devices attached
+e0e9db40        device
+E:\111>adb root
+E:\111>adb push ./DiagETH /data/nfs/share
+SocComCmd heartmonitor stop
+7 烧录整个soc:
+	1 拔掉USB烧录线
+	2 在串口终端执行 reset -f
+	3 插上USB烧录线
+	4 在烧录包中执行 burn_erase_all.bat
+	
+8 单刷qnx
+SocComCmd heartmonitor stop
+fastboot flash hyp_a mifs_hyp_la.img
+fastboot flash ifs2_a ifs2_la.img
+fastboot flash system_a system_la.img.sparse
+
+9 QCOM camera架构
+https://blog.csdn.net/KLYAZWS/article/details/121291508
+
+10 ims摄像头测试程序
+cd /bin/camera/qcarcam_test
+8cam.xml
+./qcarcam_test -config=ims_cam.xml
+./qcarcam_test -config=4cam_avm.xml
+./qcarcam_test -config=apa_cam.xml
+./qcarcam_test -config=8cam.xml
+slog2info |grep -i vfe
+slog2info | grep QCARCAM 
+slog2info | grep qcarcam_test 
+11 
+adb shell
+dumpsys activity | grep -i resume 
+adb shell dumpsys gfxinfo <PACKAGE_NAME> framestats
+adb shell dumpsys gfxinfo <qqlive.audiobox> framestats
+
+root步骤：
+adb shell
+su
+setenforce 0
+adb root
+adb remount
+12 sw-vsync
+sw-vsync -zorder=1001
+
+sw-vsync -pipeline=2 -zorder=1000 -size=800x480
+
+12
+cat /scripts/startup.sh
+cat /scripts/startup.sh  | grep -i avm
+pidin a | grep -i qvm
+
+
+13 git拉取代码
+git checkout -b TT origin/qualcom/sn8155/74X2622/develop/main
+git checkout -b TT origin/qualcom/sn8155/75A121/release/ota1
+
+git checkout -b TT origin/qualcom/sn8155/75A322/develop/main
+git pull
+git reset --hard HEAD~1
+remotes/origin/qualcom/sn8155/75A121/release/ota1
+git checkout remotes/originqualcom/sn8155/75A121/release/cw52
+git checkout remotes/origin/qualcom/sn8155/75A121/develop/main
+git checkout remotes/origin/qualcom/sn8155/75A322/develop/main
+git pull .
+
+75A121/release/cw37
+git push origin HEAD:refs/for/qualcom/sn8155/74X2622/new/develop/main
+remotes/origin/qualcom/sn8155/75A121/release/cw33
+
+git push origin HEAD:refs/for/qualcom/sn8155/75A121/release/ls
+qualcom/sn8155/74X2622/last1/develop/main
+remotes/origin/qualcom/sn8155/75A121/release/ls
+14 74x2622提交信息：
+	提交文件：
+		qnx_ap/AMSS/trunk/projects/build/chinatsp.system.files.build
+		qnx_ap/AMSS/trunk/projects/projroot/etc/system_monitor.xml
+		qnx_ap/AMSS/trunk/projects/projroot/etc/check_process.sh
+
+feat(proto): 将HMI选择车位由下发ID改为下发坐标.
+
+Description:
+将HMI选择车位由下发ID改为下发坐标.
+
+feat(DiagETH) : 例程0324功能，不管升级结果都回复肯定响应.
+
+Description:
+		75A322项目例程0324功能，不管升级结果都回复肯定响应。
+git push origin HEAD:refs/for/qualcom/sn8155/75A322/develop/main
+git push origin HEAD:refs/for/qualcom/sn8155/74X2622/new/develop/main
+
+git push origin HEAD:refs/for/qualcom/sn8155/74X2622/last1/develop/main
+http://10.100.193.154:8888/login/
+
+
+git checkout -b TT origin/qualcom/sn8155/74X2622/new/develop/main
+git checkout remotes/origin/qualcom/sn8155/74X2622/new/develop/main
+git pull .
+mount -o remount rw/
+
+/75A121/lagvm/lagvm/LINUX/android/vendor/chinatsp/apps/Applist
+./product/msmnile_gvmq/system/app/CoreDomainServer/CoreDomainServer.apk
+./product/msmnile_gvmq/system/priv-app/Applist/Applist.apk
+
+adb remount 
+adb push   xxx/xxx/CoreDomainServer.apk    /system/app/CoreDomainServer/
+
+adb shell sync
+
+adb shell killall com.chinatsp.coredomainserver
+
+
+./qnx/apps/qnx_ap/AMSS/trunk/workspace/Swdl/tool/pack_usb.sh . debug/
+adb pull /data/tsplogtool/logcat/  ./
+
+
+screen -c /lib64/graphics.conf
+
+15 安卓编译
+source build/envsetup.sh
+lunch msmnile_gvmq-userdebug
+make update-api -j8 && make -j8 2>&1 | tee log.txt
+
+16 APA运行屏蔽消息
+./APAService >/dev/null &
+
+git push origin HEAD:refs/for/qualcom/sn8155/74X2622/new/develop/main
+
+/75A121/lagvm/lagvm/LINUX/android/vendor/chinatsp/apps/Applist
+
+echo test timer 10 > /dev/power/ctl
+
+
+17 摄像头驱动调试。
+slog2info -w|grep -i max96722avm
+
+
+echo test timer 20 > /dev/power/ctl
+
+18 安卓运行
+adb push   xxx/xxx/CoreDomainServer.apk    system/app/CoreDomainServer/
+
+adb shell sync
+
+adb shell killall com.chinatsp.coredomainserver
+
+
+oelinux123
+
+
+adb push   xxx/xxx/CoreDomainServer.apk    /system/app/CoreDomainServer/
+
+adb shell sync
+
+adb shell killall com.chinatsp.coredomainserver
+
+busybox tellnet 192.168.1.8 连接qnx串口
+
+2gSrw8Rp
+
+
+TtsService
+tspcar_TTSHelper
+
+
+19 高通签名工具。解压 -> cd 当前目录 ->python elfsigner.py -t 0xb9508692 (0xxxxxxxxxx 为序列号） ->将生成的testsig-0xxxxxxxx.so 文件拷贝到/etc/images/dsp/
+
+
+20 工程模式进入
+	*#*#888
+	bicv1215
+21 tsplog | grep APA | grep -v apalib &
+
+22  am start com.omo.otaadapter/.MainActivity
+	ca75A121@
+23 :
+feat(diagservice) : 添加EOL数据收集与下发，更改DTC下发方式。
+
+Description:
+		添加EOL数据收集与下发，更改DTC下发方式。
+git push origin HEAD:refs/for/qualcom/sn8155/75A121/develop/main
+git push origin HEAD:refs/for/qualcom/sn8155/74X2622/develop/yingchi_apa
+./doip_client -s 0x710 -d 0x712 -b 0xe400 -n 127.0.0.1
+
+git checkout remotes/origin/qualcom/sn8155/74X2622/develop/yingchi_apa
+
+qualcom/sn8155/74X2622/develop/yingchi_apa
+
+	8155_A02_sop2
+	
+	git push origin HEAD:refs/for/trunk
+	
+	http://gerrit.gxatek.com:18080/c/avnt/syncore_cluster/X9M_BSP/build/+/131656
+	http://gerrit.gxatek.com:18080/c/avnt/syncore_cluster/X66/qnx/tools/+/131657
+	http://gerrit.gxatek.com:18080/c/avnt/syncore_cluster/X9M_BSP/qnx/bsp/+/131658
+	
+	
+	
+	git push origin HEAD:refs/for/qualcom/sn8155/75A322/develop/main
